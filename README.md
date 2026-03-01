@@ -20,10 +20,10 @@ The encrypted output achieves near-maximum entropy (~8 bits/pixel), near-zero pi
 
 ```
 ·
+├── main.py                # FastAPI backend
 ├── encryption.py          # Core encryption/decryption algorithms
 ├── preprocessing.py       # Non-square image handling (padding/unpadding)
 ├── test_encrypt.py        # Batch benchmark script (USC-SIPI dataset)
-├── main.py                # FastAPI backend
 ├── frontend/
 │   ├── index.html         # Single-page web UI
 │   ├── app.js             # Frontend logic
@@ -37,7 +37,9 @@ The encrypted output achieves near-maximum entropy (~8 bits/pixel), near-zero pi
 │   ├── state-diagram.png
 │   ├── screenshot-upload.png
 │   └── screenshot-results.png
-└── test_image.png         # Sample input image for testing
+├── test_image.png         # Sample input image for testing
+├── README.md            # Documentation
+└── LICENSE              # Apache-2.0 License
 ```
 
 ---
@@ -129,6 +131,7 @@ pip install fastapi uvicorn numpy pillow matplotlib pywavelets opencv-python tqd
 
 ### Run the Web Application
 
+Navigate to the project root directory, then:
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
@@ -170,7 +173,7 @@ Full per-image results are available in the `results/` directory.
 
 ## License
 
-MIT License. See `LICENSE` for details.
+Apache-2.0 License. See `LICENSE` for details.
 
 ---
 
