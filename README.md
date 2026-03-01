@@ -19,11 +19,11 @@ The encrypted output achieves near-maximum entropy (~8 bits/pixel), near-zero pi
 ## Project Structure
 
 ```
-├── backend/
-│   ├── encryption.py          # Core encryption/decryption algorithms
-│   ├── preprocessing.py       # Non-square image handling (padding/unpadding)
-│   ├── main.py                # FastAPI backend
-│   └── test_encrypt.py        # Batch benchmark script (USC-SIPI dataset)
+·
+├── encryption.py          # Core encryption/decryption algorithms
+├── preprocessing.py       # Non-square image handling (padding/unpadding)
+├── test_encrypt.py        # Batch benchmark script (USC-SIPI dataset)
+├── main.py                # FastAPI backend
 ├── frontend/
 │   ├── index.html         # Single-page web UI
 │   ├── app.js             # Frontend logic
