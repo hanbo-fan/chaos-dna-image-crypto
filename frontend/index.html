@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Encryption System</title>
+    <link rel="stylesheet" href="/static/style.css">
+   
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Image Encryption System</h1>
+        <p class="subtitle">Arnold Transform + DNA Encoding + Chaos Enhancement</p>
+        <hr>
+
+        <!-- State 1: Initial Upload -->
+        <div id="initial-state">
+            <div class="welcome-box">
+                <h2>Welcome to Secure Image Encryption</h2>
+                <p>Upload your image to begin encryption using our advanced security system:</p>
+                <p><strong>Arnold Transform</strong> for geometric scrambling</p>
+                <p><strong>DNA Encoding</strong> for value substitution</p>
+                <p><strong>Chaos Enhancement</strong> for cryptographic strength</p>
+            </div>
+            <label for="file-input" class="upload-btn">📁 Upload Image</label>
+            <input type="file" id="file-input" accept="image/*">
+        </div>
+
+        <!-- State 2: Image Info -->
+        <div id="image-info-state">
+            <div class="info-card">
+                <h3>📊 Image Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Filename</div>
+                        <div class="info-value" id="info-filename">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Format</div>
+                        <div class="info-value" id="info-format">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Size</div>
+                        <div class="info-value" id="info-size">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Color Mode</div>
+                        <div class="info-value" id="info-mode">-</div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="resetUpload()">🔄 Re-upload</button>
+                    <button class="btn btn-primary" onclick="startEncryption()">🔐 Encrypt Image</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loading-state">
+            <div class="spinner"></div>
+            <p>Processing encryption... This may take a moment.</p>
+        </div>
+
+        <!-- State 3: Results -->
+        <div id="results-state">
+            <div class="results-grid">
+                <div class="image-card">
+                    <h3>Original Image</h3>
+                    <img id="img-original" src="" alt="Original">
+                    <img id="hist-original" src="" alt="Original Histogram">
+                </div>
+                <div class="image-card">
+                    <h3>Encrypted Image</h3>
+                    <img id="img-encrypted" src="" alt="Encrypted">
+                    <img id="hist-encrypted" src="" alt="Encrypted Histogram">
+                </div>
+                <div class="image-card">
+                    <h3>Decrypted Image</h3>
+                    <img id="img-decrypted" src="" alt="Decrypted">
+                    <img id="hist-decrypted" src="" alt="Decrypted Histogram">
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <h3>🔒 Security Analysis Report</h3>
+                
+                <div class="stat-group">
+                    <h4>Information Entropy</h4>
+                    <div class="stat-row">
+                        <span class="stat-label">Original Entropy:</span>
+                        <span class="stat-value" id="entropy-original">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Encrypted Entropy:</span>
+                        <span class="stat-value-encrypt" id="entropy-encrypted">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Decrypted Entropy:</span>
+                        <span class="stat-value" id="entropy-decrypted">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Quality:</span>
+                        <span id="entropy-quality">-</span>
+                    </div>
+                </div>
+
+                <div class="stat-group">
+                    <h4>Pixel Correlation</h4>
+                    <div class="stat-row">
+                        <span class="stat-label">Original (Horizontal):</span>
+                        <span class="stat-value" id="corr-original-h">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Encrypted (Horizontal):</span>
+                        <span class="stat-value-encrypt" id="corr-encrypted-h">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Original (Vertical):</span>
+                        <span class="stat-value" id="corr-original-v">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Encrypted (Vertical):</span>
+                        <span class="stat-value-encrypt" id="corr-encrypted-v">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Original (Diagonal):</span>
+                        <span class="stat-value" id="corr-original-d">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Encrypted (Diagonal):</span>
+                        <span class="stat-value-encrypt" id="corr-encrypted-d">-</span>
+                    </div>
+                </div>
+
+                <div class="stat-group">
+                    <h4>Histogram Uniformity</h4>
+                    <div class="stat-row">
+                        <span class="stat-label">Mean Count:</span>
+                        <span class="stat-value" id="hist-mean">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Std Deviation:</span>
+                        <span class="stat-value" id="hist-std">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Uniformity Score:</span>
+                        <span class="stat-value" id="hist-uniformity">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Quality:</span>
+                        <span id="hist-quality">-</span>
+                    </div>
+                </div>
+
+                <div class="stat-group">
+                    <h4>Decryption Accuracy</h4>
+                    <div class="stat-row">
+                        <span class="stat-label">Mean Squared Error:</span>
+                        <span class="stat-value" id="mse">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Perfect Match:</span>
+                        <span class="stat-value" id="perfect-match">-</span>
+                    </div>
+                </div>
+
+                <div class="stat-group">
+                    <h4>Key Sensitivity Test</h4>
+                    <div class="stat-row">
+                        <span class="stat-label">Different Pixels:</span>
+                        <span class="stat-value" id="key-diff-pixels">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Total Pixels:</span>
+                        <span class="stat-value" id="key-total-pixels">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Difference Ratio:</span>
+                        <span class="stat-value" id="key-diff-ratio">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="resetUpload()">🔄 Encrypt Another Image</button>
+            </div>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
